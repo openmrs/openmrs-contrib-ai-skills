@@ -10,6 +10,11 @@
       "name": "openmrs-create-ticket",
       "description": "Draft and file a well-structured OpenMRS Jira ticket",
       "source": "./skills/openmrs-create-ticket"
+    },
+    {
+      "name": "openmrs-pr-review",
+      "description": "Review a GitHub pull request with verified findings and concise inline comments",
+      "source": "./skills/openmrs-pr-review"
     }
   ]
 }
