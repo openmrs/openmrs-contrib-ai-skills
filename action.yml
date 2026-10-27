@@ -1,0 +1,28 @@
+name: Install OpenMRS AI skills
+description: Copies selected OpenMRS agent skills into the workspace so an agent running later in the job can use them.
+inputs:
+  skills:
+    description: Skill names to install, separated by commas, spaces or newlines.
+    required: true
+  path:
+    description: Directory to install into, relative to the workspace. Use `.agents/skills` for agents other than Claude Code.
+    default: .claude/skills
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        SKILLS: ${{ inputs.skills }}
+        DEST: ${{ github.workspace }}/${{ inputs.path }}
+        SRC: ${{ github.action_path }}/skills
+      run: |
+        mkdir -p "$DEST"
+        for skill in $(echo "$SKILLS" | tr ',' ' '); do
+          if [ ! -f "$SRC/$skill/SKILL.md" ]; then
+            echo "::error::Unknown skill: $skill"
+            exit 1
+          fi
+          rm -rf "${DEST:?}/$skill"
+          cp -R "$SRC/$skill" "$DEST/$skill"
+          echo "Installed $skill into $DEST/$skill"
+        done

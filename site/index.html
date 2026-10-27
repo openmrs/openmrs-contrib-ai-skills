@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenMRS AI Skills</title>
+<link rel="icon" href="openmrs-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --omrs-orange: #F26522;
+    --omrs-teal: #009383;
+    --omrs-gold: #EEA616;
+    --omrs-purple: #5B57A6;
+    --omrs-purple-dark: #433F85;
+    --text: #161616;
+    --text-muted: #525252;
+    --border: #E0E0E0;
+    --surface: #F4F4F4;
+    color-scheme: light;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+  a { color: var(--omrs-purple); }
+  a:hover { color: var(--omrs-purple-dark); }
+  code, pre { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  .wrap { max-width: 56rem; margin: 0 auto; padding-inline: 24px; }
+
+  .stripe { display: grid; grid-template-columns: repeat(4, 1fr); height: 6px; }
+  .stripe span:nth-child(1) { background: var(--omrs-orange); }
+  .stripe span:nth-child(2) { background: var(--omrs-teal); }
+  .stripe span:nth-child(3) { background: var(--omrs-gold); }
+  .stripe span:nth-child(4) { background: var(--omrs-purple); }
+
+  .site-header { border-bottom: 1px solid var(--border); }
+  .site-header .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-block: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: "Avenir LT Std", "Avenir LT Pro", Avenir, "Avenir Next", "IBM Plex Sans", system-ui, sans-serif; font-size: 21px; font-weight: 400; }
+  .brand:hover { color: var(--text); }
+  .brand img { width: 32px; height: 32px; display: block; }
+  .site-header nav { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+  .site-header nav a { text-decoration: none; }
+
+  main { flex: 1; }
+  .hero { display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 40px; padding-block: 64px 40px; }
+  .hero-text { flex: 999 1 420px; min-width: 0; }
+  .eyebrow { margin: 0 0 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #C2410C; }
+  h1 { margin: 0 0 16px; font-size: clamp(32px, 6vw, 44px); line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; }
+  .lede { margin: 0; font-size: 18px; color: var(--text-muted); max-width: 36rem; }
+  .hero-logo { width: 144px; height: 144px; flex: 0 0 auto; }
+
+  .skills { padding-bottom: 72px; }
+  .skills-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; }
+  .skills-head h2 { margin: 0; font-size: 22px; font-weight: 600; }
+  .skills-head span { font-size: 14px; color: var(--text-muted); }
+
+  article { border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+  article header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+  article h3 { margin: 0; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 20px; font-weight: 500; }
+  .version { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px; background: #E3F3F1; color: #00665C; }
+  article p { margin: 0 0 16px; color: #393939; }
+
+  .cmd { display: flex; align-items: center; gap: 8px; background: var(--surface); border-radius: 6px; padding: 6px 6px 6px 16px; margin-bottom: 16px; }
+  .cmd pre { flex: 1; min-width: 0; margin: 0; overflow-x: auto; font-size: 14px; }
+  .cmd button { flex: 0 0 auto; min-height: 36px; min-width: 76px; padding: 0 12px; border: 1px solid #C6C6C6; border-radius: 4px; background: #fff; color: var(--text); font: 500 13px "IBM Plex Sans", system-ui, sans-serif; cursor: pointer; }
+  .cmd button:hover { border-color: var(--omrs-purple); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 15px; border: 1px solid var(--omrs-purple); }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-primary { background: var(--omrs-purple); color: #fff; }
+  .btn-primary:hover { background: var(--omrs-purple-dark); border-color: var(--omrs-purple-dark); color: #fff; }
+  .btn-secondary { color: var(--omrs-purple); }
+  .btn-secondary:hover { background: #EFEEF7; }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--omrs-purple); outline-offset: 2px; }
+
+  .site-footer { border-top: 1px solid var(--border); }
+  .site-footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-block: 24px; font-size: 14px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="https://openmrs.org"><img src="openmrs-logo.png" alt=""> OpenMRS</a>
+    <nav aria-label="Site">
+      <a href="https://github.com/{{repo}}#readme">README</a>
+      <a href="https://github.com/{{repo}}">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="hero-text">
+      <p class="eyebrow">Agent skills</p>
+      <h1>OpenMRS AI Skills</h1>
+      <p class="lede">Agent skills for working with OpenMRS. See the <a href="https://github.com/{{repo}}#readme">README</a> for every way to install them.</p>
+    </div>
+    <img class="hero-logo" src="openmrs-logo.png" alt="OpenMRS logo">
+  </section>
+
+  <section class="wrap skills" aria-labelledby="skills-heading">
+    <div class="skills-head">
+      <h2 id="skills-heading">Skills</h2>
+      <span>{{skillCount}}</span>
+    </div>
+{{skills}}
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Maintained by the OpenMRS community.</span>
+    <a href="https://openmrs.org">openmrs.org</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.cmd .copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.parentElement.querySelector('pre').textContent.trim();
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
+    });
+  });
+</script>
+</body>
+</html>

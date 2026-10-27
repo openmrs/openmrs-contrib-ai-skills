@@ -1,0 +1,15 @@
+{
+  "name": "openmrs",
+  "description": "AI agent skills for working with OpenMRS",
+  "owner": {
+    "name": "OpenMRS",
+    "url": "https://openmrs.org"
+  },
+  "plugins": [
+    {
+      "name": "openmrs-create-ticket",
+      "description": "Draft and file a well-structured OpenMRS Jira ticket",
+      "source": "./skills/openmrs-create-ticket"
+    }
+  ]
+}

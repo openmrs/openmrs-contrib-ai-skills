@@ -1,0 +1,12 @@
+{
+  "name": "openmrs-contrib-ai-skills",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build-site.mjs"
+  },
+  "devDependencies": {
+    "yaml": "2.9.1"
+  }
+}
