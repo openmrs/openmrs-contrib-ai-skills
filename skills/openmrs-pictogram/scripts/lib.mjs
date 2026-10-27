@@ -5,11 +5,17 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 
-// Run from inside an O3 checkout, the other repos are its siblings. Run from the
-// folder that holds the checkouts, they're right here.
-const hasEsmCheckouts = (dir) => fs.readdirSync(dir).some((d) => d.startsWith('openmrs-esm-'));
-export const DEFAULT_REPOS_DIR =
-  process.env.O3_REPOS_DIR || (hasEsmCheckouts(process.cwd()) ? process.cwd() : path.dirname(process.cwd()));
+// The folder that holds the O3 checkouts: the current folder or the nearest one
+// above it, so this works from anywhere inside a checkout
+function findReposDir(start) {
+  for (let dir = start; ; dir = path.dirname(dir)) {
+    try {
+      if (fs.readdirSync(dir).some((d) => d.startsWith('openmrs-esm-'))) return dir;
+    } catch {}
+    if (path.dirname(dir) === dir) return path.dirname(start);
+  }
+}
+export const DEFAULT_REPOS_DIR = process.env.O3_REPOS_DIR || findReposDir(process.cwd());
 const windowsChrome = [process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)'], process.env.LOCALAPPDATA]
   .filter(Boolean)
   .map((dir) => path.join(dir, 'Google', 'Chrome', 'Application', 'chrome.exe'));

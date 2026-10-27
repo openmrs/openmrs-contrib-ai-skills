@@ -2,7 +2,7 @@
 name: openmrs-pictogram
 description: Choose or draw a pictogram for an O3 page header, check it against the pictograms and illustrations already in use, and add it to esm-styleguide. Use when an O3 page needs a header pictogram, when a PageHeader has an empty illustration, or when asked to pick, draw, review or integrate a pictogram.
 license: MPL-2.0 with Healthcare Disclaimer (https://github.com/openmrs/openmrs-contrib-ai-skills/blob/main/LICENSE)
-compatibility: Needs Node 18 or newer, Chrome or Chromium, and local clones of openmrs-esm-core and the O3 apps. Optional, the GitHub CLI (gh) for inventory --github. Downloads Carbon pictogram metadata from jsDelivr on first use unless @carbon/pictograms is installed nearby.
+compatibility: Needs Node 18 or newer, Chrome or Chromium, and local clones of openmrs-esm-core and the O3 apps. Optionally uses the GitHub CLI (gh) for inventory --github. Downloads Carbon pictogram metadata from jsDelivr on first use unless @carbon/pictograms is installed nearby.
 metadata:
   version: "1.0.0"
 ---
@@ -17,7 +17,7 @@ If the user hasn't said which page, ask. Before pushing, opening a PR or editing
 
 ## Scripts
 
-The scripts are in this skill's `scripts/` folder. They're plain Node with no npm dependencies, and they take paths as arguments. Run them from an O3 checkout: repos default to `$O3_REPOS_DIR`, then the current folder if it holds `openmrs-esm-*` checkouts, then its parent. Chrome is found at the standard macOS, Linux and Windows locations (override with `--chrome` or `CHROME_PATH`). Write every output to one directory per task, because the user reviews it. Apart from those outputs, the scripts only write a cached copy of the Carbon registry to the temp directory. In the examples, `<skill>` is this skill's folder.
+The scripts are in this skill's `scripts/` folder. They're plain Node with no npm dependencies, and they take paths as arguments. Run them from anywhere inside an O3 checkout: repos default to `$O3_REPOS_DIR`, then the nearest folder at or above the current one that holds `openmrs-esm-*` checkouts. Chrome is found at the standard macOS, Linux and Windows locations (override with `--chrome` or `CHROME_PATH`). Write every output to one directory per task, because the user reviews it. Apart from those outputs, the scripts only write a cached copy of the Carbon registry to the temp directory. In the examples, `<skill>` is this skill's folder.
 
 | Script | Use it for |
 |---|---|
