@@ -210,5 +210,9 @@ lines.push(...(illustrations.length ? illustrations.map((i) => `- ${i}`) : ['- n
 lines.push('', 'Render these next to candidates with preview.mjs --jsx; a candidate can collide with them too.');
 
 const report = lines.join('\n');
-if (args.out) fs.writeFileSync(expandHome(args.out), report + '\n');
+if (args.out) {
+  const out = expandHome(args.out);
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, report + '\n');
+}
 console.log(report);
