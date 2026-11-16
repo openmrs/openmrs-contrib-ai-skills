@@ -9,6 +9,7 @@ A catalog of every skill is published at https://skills.openmrs.org/ (machine-re
 | Skill | Description |
 | --- | --- |
 | [`openmrs-create-ticket`](skills/openmrs-create-ticket/) | Draft and file a well-structured OpenMRS Jira ticket |
+| [`openmrs-pictogram`](skills/openmrs-pictogram/) | Choose or draw a pictogram for an O3 page header and add it to esm-styleguide |
 | [`openmrs-pr-review`](skills/openmrs-pr-review/) | Review a GitHub pull request with verified findings and concise inline comments |
 
 ## Installing a single skill
